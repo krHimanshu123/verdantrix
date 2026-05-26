@@ -1,0 +1,8 @@
+Buchungskreis,Werk,Materialbeschreibung,Menge,Einheit,Buchungsdatum,Kraftstofftyp
+1000,WERK_MUM_01,Dieselkraftstoff,4500,L,2026-01-12,Diesel
+1000,WERK_DEL_02,Petrol Fuel,320,ltr,14/01/2026,Petrol
+2000,WERK_BLR_04,Industrial Gas,1200,m3,2026/02/01,Natural Gas
+1000,WERK_MUM_01,Dieselkraftstoff,-120,L,2026-02-18,Diesel
+3000,WERK_HYD_07,Fleet Fuel,8900,Litres,03-03-2026,Diesel
+1000,WERK_DEL_02,Generator Fuel,45000,L,2027-01-10,Diesel
+4000,WERK_PUN_03,Procurement Fuel,780,Gallons,2026-03-12,Diesel

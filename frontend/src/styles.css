@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #162033;
+  background: #f3f5f8;
+  --bg-app: #f3f5f8;
+  --bg-panel: #ffffff;
+  --bg-panel-soft: #f8fafc;
+  --bg-sidebar: #111827;
+  --bg-sidebar-muted: #1f2937;
+  --text-main: #162033;
+  --text-muted: #667085;
+  --border-soft: #dbe3ed;
+  --border-strong: #c8d3df;
+  --shadow-panel: 0 10px 22px rgba(15, 23, 42, 0.06);
+  --shadow-soft: 0 6px 16px rgba(15, 23, 42, 0.05);
+
+  --chart-1: var(--text-main);
+  --chart-2: var(--text-muted);
+  --chart-3: var(--border-strong);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
+  color: var(--text-main);
+  background: var(--bg-app);
+}
+
+#root {
+  height: 100%;
+}
+
+.bg-app {
+  background: var(--bg-app);
+}
+
+.panel {
+  @apply rounded-2xl border bg-white;
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-panel);
+}
+
+.panel-header {
+  @apply flex items-center justify-between gap-4 border-b px-5 py-4;
+  border-color: var(--border-soft);
+}
+
+.panel-body {
+  @apply p-5;
+}
+
+.input {
+  @apply w-full rounded-xl border bg-white px-4 py-3 text-sm outline-none transition;
+  border-color: var(--border-strong);
+  color: var(--text-main);
+}
+
+.input:focus {
+  border-color: #475467;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.18);
+}
+
+.select {
+  @apply input appearance-none;
+}
+
+.button-primary {
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:bg-slate-400;
+  background: var(--bg-sidebar-muted);
+}
+
+.button-primary:hover {
+  background: var(--bg-sidebar);
+}
+
+.button-secondary {
+  @apply inline-flex items-center justify-center rounded-xl border bg-white px-4 py-2.5 text-sm font-semibold transition;
+  border-color: var(--border-strong);
+  color: #344054;
+}
+
+.button-secondary:hover {
+  border-color: #98a2b3;
+  background: #f8fafc;
+}
+
+.status-pill {
+  @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold capitalize;
+}
+
+.workspace-header {
+  @apply mb-6 flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between;
+}
+
+.workspace-title {
+  @apply mt-2 text-3xl font-semibold tracking-tight text-slate-900;
+}
+
+.workspace-copy {
+  @apply mt-2 max-w-3xl text-sm leading-6 text-slate-500;
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.28em] text-slate-500;
+}
+
+.alert-banner {
+  @apply rounded-xl border px-4 py-3 text-sm;
+}
+
+.alert-error {
+  @apply border-rose-200 bg-rose-50 text-rose-700;
+}
+
+.alert-info {
+  @apply border-slate-200 bg-slate-50 text-slate-700;
+}
+
+.table-shell {
+  @apply overflow-hidden rounded-2xl border bg-white;
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-panel);
+}
+
+.table-compact {
+  @apply min-w-full text-left text-sm;
+}
+
+.table-compact thead {
+  @apply bg-slate-50 text-slate-500;
+}
+
+.table-compact th {
+  @apply px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em];
+}
+
+.table-compact td {
+  @apply px-4 py-4 align-top;
+}
+
+.table-compact tbody tr:hover {
+  background: var(--bg-panel-soft);
+}
+
+.table-compact tbody tr {
+  border-color: var(--border-soft);
+}
+
+.dropzone {
+  @apply rounded-2xl border border-dashed bg-slate-50 p-5 transition;
+  border-color: var(--border-strong);
+}
+
+.dropzone-active {
+  border-color: #344054;
+  background: #eef2f6;
+}
+
+.auth-shell {
+  @apply flex min-h-screen items-center justify-center px-4;
+  background: var(--bg-app);
+}
+
+.auth-panel {
+  @apply grid w-full max-w-6xl overflow-hidden rounded-[28px] border bg-white/95 shadow-2xl lg:grid-cols-[1fr_0.95fr];
+  border-color: #dbe3ed;
+}
+
+.auth-aside {
+  @apply hidden p-10 text-white lg:block;
+  background: linear-gradient(180deg, #111827 0%, #182230 100%);
+}
+
+.auth-eyebrow {
+  @apply text-xs uppercase tracking-[0.35em] text-slate-400;
+}
+
+.auth-title {
+  @apply mt-6 text-4xl font-semibold leading-tight;
+}
+
+.auth-copy {
+  @apply mt-6 max-w-md text-sm leading-7 text-slate-300;
+}
+
+.auth-content {
+  @apply p-8 sm:p-10;
+}
+
+.metric-grid {
+  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-4;
+}
+
+.kpi-meta {
+  @apply mt-2 text-xs uppercase tracking-[0.18em] text-slate-500;
+}
+
+.modal-backdrop {
+  @apply fixed inset-0 z-40 flex items-center justify-center bg-slate-950/40 p-4;
+}
+
+.modal-card {
+  @apply w-full max-w-md rounded-2xl border bg-white p-6 shadow-2xl;
+  border-color: var(--border-soft);
+}
+
+.sticky-head thead th {
+  @apply sticky top-0 z-10 bg-slate-50;
+  box-shadow: 0 1px 0 0 rgba(203, 213, 225, 0.9);
+}
+
+.sidebar {
+  background: linear-gradient(180deg, var(--bg-sidebar) 0%, var(--bg-sidebar-muted) 100%);
+}

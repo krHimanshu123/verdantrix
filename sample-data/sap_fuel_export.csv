@@ -1,0 +1,9 @@
+Buchungskreis,Werk,Materialbeschreibung,Menge,Einheit,Buchungsdatum,Kraftstofftyp
+DE01,1000,Dieselkraftstoff fuer Werksflotte,18450,L,2025-01-31,Diesel
+DE01,1100,Heizoel fuer Dampfkessel,9200,kg,31.01.2025,Heizol
+NL10,2100,Benzin fuer Gabelstapler,3980,GAL,15/02/2025,Benzin
+US20,3100,Natural Gas backup generator,28500,KG,2025/02/18,Natural Gas
+DE01,1000,Dieselkraftstoff fuer Werksflotte,18450,L,2025-01-31,Diesel
+US20,3100,Emergency generator diesel,-250,L,2025-03-02,Diesel
+DE01,1100,Bulk diesel transfer after shutdown test,67000,L,04-03-2025,Diesel
+DE01,9999,Plant utility top-up,1250,,2027-01-12,Diesel

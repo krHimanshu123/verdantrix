@@ -1,0 +1,38 @@
+[
+  {
+    "employee_id": "EMP-1001",
+    "booking_type": "flight",
+    "origin": "DEL",
+    "destination": "BLR",
+    "distance_km": 1740,
+    "class_of_travel": "economy",
+    "booking_date": "2026-03-14"
+  },
+  {
+    "employee_id": "EMP-1002",
+    "booking_type": "flight",
+    "origin": "BOM",
+    "destination": "DXB",
+    "distance_km": null,
+    "class_of_travel": "business",
+    "booking_date": "2026-03-22"
+  },
+  {
+    "employee_id": "EMP-1003",
+    "booking_type": "hotel",
+    "origin": "HYD",
+    "destination": "HYD",
+    "distance_km": 0,
+    "class_of_travel": "standard",
+    "booking_date": "2026-04-01"
+  },
+  {
+    "employee_id": "EMP-1004",
+    "booking_type": "ground_transport",
+    "origin": "BLR",
+    "destination": "BLR",
+    "distance_km": 34,
+    "class_of_travel": "cab",
+    "booking_date": "2026-04-05"
+  }
+]

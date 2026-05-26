@@ -1,0 +1,17 @@
+services:
+  verdantrix-mysql:
+    image: mysql:8.4
+    container_name: verdantrix-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: verdantrix_core
+      MYSQL_USER: verdantrix_app
+      MYSQL_PASSWORD: verdantrix_app_password
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - verdantrix_mysql_data:/var/lib/mysql
+
+volumes:
+  verdantrix_mysql_data:

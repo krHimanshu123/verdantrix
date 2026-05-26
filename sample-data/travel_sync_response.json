@@ -1,0 +1,65 @@
+[
+  {
+    "employee_id": "E-10448",
+    "booking_type": "air",
+    "origin": "FRA",
+    "destination": "LHR",
+    "distance_km": "",
+    "class_of_travel": "business",
+    "booking_date": "2025-02-11"
+  },
+  {
+    "employee_id": "E-22091",
+    "booking_type": "air",
+    "origin": "JFK",
+    "destination": "SFO",
+    "distance_km": "4162",
+    "class_of_travel": "economy",
+    "booking_date": "11/03/2025"
+  },
+  {
+    "employee_id": "E-31004",
+    "booking_type": "rail",
+    "origin": "BER",
+    "destination": "AMS",
+    "distance_km": "655",
+    "class_of_travel": "standard",
+    "booking_date": "2025/03/19"
+  },
+  {
+    "employee_id": "E-10448",
+    "booking_type": "air",
+    "origin": "FRA",
+    "destination": "LHR",
+    "distance_km": "",
+    "class_of_travel": "business",
+    "booking_date": "2025-02-11"
+  },
+  {
+    "employee_id": "E-90882",
+    "booking_type": "air",
+    "origin": "SIN",
+    "destination": "NRT",
+    "distance_km": null,
+    "class_of_travel": "premium economy",
+    "booking_date": "21.04.2025"
+  },
+  {
+    "employee_id": "E-41107",
+    "booking_type": "air",
+    "origin": "BOM",
+    "destination": "DXB",
+    "distance_km": "1926",
+    "class_of_travel": "first",
+    "booking_date": "2025-05-07"
+  },
+  {
+    "employee_id": "E-22091",
+    "booking_type": "air",
+    "origin": "ORD",
+    "destination": "SEA",
+    "distance_km": "15000",
+    "class_of_travel": "business",
+    "booking_date": "2025-05-21"
+  }
+]
