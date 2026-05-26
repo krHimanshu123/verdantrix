@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
@@ -63,19 +64,26 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "config.asgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("MYSQL_DATABASE", "verdantrix_core"),
-        "USER": os.getenv("MYSQL_USER", "root"),
-        "PASSWORD": os.getenv("MYSQL_PASSWORD", ""),
-        "HOST": os.getenv("MYSQL_HOST", "127.0.0.1"),
-        "PORT": int(os.getenv("MYSQL_PORT", "3306")),
-        "OPTIONS": {
-            "charset": "utf8mb4",
-        },
+DATABASE_URL = os.getenv("DATABASE_URL")
+DJANGO_DB_CONN_MAX_AGE = int(os.getenv("DJANGO_DB_CONN_MAX_AGE", "0"))
+DJANGO_DB_SSL_REQUIRE = os.getenv("DJANGO_DB_SSL_REQUIRE", "False").lower() == "true"
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=DJANGO_DB_CONN_MAX_AGE,
+            ssl_require=DJANGO_DB_SSL_REQUIRE,
+        )
     }
-}
+else:
+    sqlite_db_url = f"sqlite:///{(BASE_DIR / 'db.sqlite3').resolve().as_posix()}"
+    DATABASES = {
+        "default": dj_database_url.parse(
+            sqlite_db_url,
+            conn_max_age=0,
+        )
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
