@@ -1,6 +1,7 @@
 import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import Icon from "../components/Icon";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -85,15 +86,22 @@ export default function RegisterPage() {
     <div className="auth-shell">
       <div className="auth-panel">
         <div className="auth-aside">
-          <p className="auth-eyebrow">Verdantrix</p>
-          <h1 className="auth-title">Create an account for your organization workspace.</h1>
-          <p className="auth-copy">Accounts are local to this environment and stored in the workspace database.</p>
+          <div className="relative flex items-center gap-3"><div className="brand-mark"><Icon name="leaf" className="h-5 w-5" /></div><div><p className="text-lg font-bold">Verdantrix</p><p className="text-[10px] uppercase tracking-[.18em] text-emerald-300">Carbon intelligence</p></div></div>
+          <h1 className="auth-title">Build a credible carbon data foundation from day one.</h1>
+          <p className="auth-copy">Your workspace includes realistic example data, automated validation, and complete record lineage—ready to explore immediately.</p>
+          <div className="auth-proof">
+            <div><Icon name="upload" className="h-5 w-5 text-emerald-300"/><strong className="mt-3 block text-sm">Import</strong><span className="text-[10px] text-slate-400">Source data</span></div>
+            <div><Icon name="review" className="h-5 w-5 text-emerald-300"/><strong className="mt-3 block text-sm">Validate</strong><span className="text-[10px] text-slate-400">Exceptions</span></div>
+            <div><Icon name="shield" className="h-5 w-5 text-emerald-300"/><strong className="mt-3 block text-sm">Report</strong><span className="text-[10px] text-slate-400">With trust</span></div>
+          </div>
         </div>
 
         <div className="auth-content">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Create account</p>
-          <h2 className="mt-3 text-3xl font-semibold text-slate-900">Set up access</h2>
-          <p className="mt-3 text-sm text-slate-500">Create a local account and start working in your organization workspace.</p>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700">Get started</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">Create your workspace</h2>
+          <p className="mt-3 text-sm text-slate-500">
+            Create a local account. Your workspace starts with example emissions data so you can explore the dashboard immediately.
+          </p>
 
           <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
             <Field label="Organization name" error={fieldErrors.organization_name}>

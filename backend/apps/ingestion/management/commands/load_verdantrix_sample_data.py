@@ -1,12 +1,7 @@
-import json
-from pathlib import Path
-
-from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand, CommandError
 
-from apps.ingestion.services import ingest_csv_source, ingest_travel_payload
+from apps.ingestion.sample_data import load_sample_data_for_organization
 from apps.organizations.models import Organization
-from common.constants import SOURCE_TYPE_SAP, SOURCE_TYPE_UTILITY
 
 
 class Command(BaseCommand):
@@ -21,8 +16,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        root_dir = Path(__file__).resolve().parents[5]
-        sample_dir = root_dir / "sample-data"
         organization = Organization.objects.first()
         if not organization:
             organization = Organization.objects.create(
@@ -47,25 +40,11 @@ class Command(BaseCommand):
             except Exception:
                 uploaded_by = None
 
-        for file_name, source_type in [
-            ("sap_fuel_export.csv", SOURCE_TYPE_SAP),
-            ("utility_billing_export.csv", SOURCE_TYPE_UTILITY),
-        ]:
-            csv_bytes = (sample_dir / file_name).read_bytes()
-            content = ContentFile(csv_bytes, name=file_name)
-            ingest_csv_source(
-                organization_id=organization.id,
-                source_type=source_type,
-                uploaded_by=uploaded_by,
-                file=content,
-                upload_method="sample_seed",
-            )
-
-        travel_records = json.loads((sample_dir / "travel_sync_response.json").read_text(encoding="utf-8"))
-        ingest_travel_payload(
-            organization_id=organization.id,
+        loaded = load_sample_data_for_organization(
+            organization=organization,
             uploaded_by=uploaded_by,
-            records=travel_records,
         )
-
-        self.stdout.write(self.style.SUCCESS("Verdantrix sample datasets loaded successfully."))
+        if loaded:
+            self.stdout.write(self.style.SUCCESS("Verdantrix sample datasets loaded successfully."))
+        else:
+            self.stdout.write(self.style.WARNING("Sample data already exists; nothing was added."))

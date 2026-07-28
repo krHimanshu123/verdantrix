@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from apps.organizations.models import Organization
+from apps.ingestion.sample_data import load_sample_data_for_organization
 from common.constants import ACTION_APPROVE, ACTION_LOCK, ACTION_NOTE, ACTION_REJECT
 
 User = get_user_model()
@@ -86,6 +87,10 @@ class RegisterSerializer(serializers.Serializer):
         )
         user.set_password(password)
         user.save()
+        load_sample_data_for_organization(
+            organization=organization,
+            uploaded_by=user,
+        )
         return user
 
 

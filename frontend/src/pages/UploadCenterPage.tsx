@@ -2,6 +2,7 @@ import { ChangeEvent, DragEvent, ReactNode, useEffect, useMemo, useState } from 
 import AlertBanner from "../components/AlertBanner";
 import EmptyState from "../components/EmptyState";
 import StatusPill from "../components/StatusPill";
+import Icon from "../components/Icon";
 import { useAsyncData } from "../hooks/useAsyncData";
 import { fetchDataSources, fetchOrganizations, syncTravel, uploadFile } from "../services/api";
 import { DataSourceSummary, Organization } from "../types";
@@ -134,8 +135,8 @@ export default function UploadCenterPage() {
     <div className="space-y-6">
       <div className="workspace-header">
         <div>
-          <p className="eyebrow">Ingestion</p>
-          <h1 className="workspace-title">Upload Center</h1>
+          <p className="eyebrow">Connected data pipeline</p>
+          <h1 className="workspace-title">Data ingestion</h1>
           <p className="workspace-copy">
             Load source files, review ingestion outcomes, and keep the latest run summaries visible to the analyst team.
           </p>
@@ -157,6 +158,8 @@ export default function UploadCenterPage() {
 
       <div className="grid gap-6 xl:grid-cols-3">
         <UploadCard
+          icon="database"
+          tag="ERP connector"
           title="SAP Upload"
           description="Fuel extracts with plant mapping, unit cleanup, and source-row preservation."
           progress={progress.sap || 0}
@@ -180,6 +183,8 @@ export default function UploadCenterPage() {
         </UploadCard>
 
         <UploadCard
+          icon="trend"
+          tag="Energy data"
           title="Utility Upload"
           description="Billing exports with mixed date formats, unit normalization, and anomaly checks."
           progress={progress.utility || 0}
@@ -203,6 +208,8 @@ export default function UploadCenterPage() {
         </UploadCard>
 
         <UploadCard
+          icon="leaf"
+          tag="Business travel"
           title="Travel Sync"
           description="Mocked sync path for booking records, with distance fallback and travel-class factors."
           progress={busy === "travel" ? 100 : 0}
@@ -315,6 +322,8 @@ export default function UploadCenterPage() {
 }
 
 function UploadCard({
+  icon,
+  tag,
   title,
   description,
   progress,
@@ -325,6 +334,8 @@ function UploadCard({
   onDragLeave,
   onDrop,
 }: {
+  icon: string;
+  tag: string;
   title: string;
   description: string;
   progress: number;
@@ -338,10 +349,15 @@ function UploadCard({
   return (
     <div className="panel">
       <div className="panel-body">
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <div className="flex items-start justify-between">
+          <div className="metric-icon"><Icon name={icon} className="h-5 w-5" /></div>
+          <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">{tag}</span>
+        </div>
+        <h2 className="mt-5 text-lg font-bold tracking-tight">{title}</h2>
         <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
         <div className={`dropzone mt-6 ${active ? "dropzone-active" : ""}`} onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
-          <div className="h-2 overflow-hidden rounded-full bg-slate-200">
+          <div className="mb-4 flex items-center justify-center"><div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-emerald-600 shadow-sm"><Icon name="upload" className="h-5 w-5" /></div></div>
+          <div className="h-1.5 overflow-hidden rounded-full bg-slate-200">
             <div
               className={`h-full rounded-full ${busy ? "bg-slate-900" : "bg-slate-400"}`}
               style={{ width: `${progress}%` }}

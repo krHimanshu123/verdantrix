@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import Icon from "../components/Icon";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -44,15 +45,20 @@ export default function LoginPage() {
     <div className="auth-shell">
       <div className="auth-panel">
         <div className="auth-aside">
-          <p className="auth-eyebrow">Verdantrix</p>
-          <h1 className="auth-title">Operational console for ingestion, review, and audit history.</h1>
-          <p className="auth-copy">Sign in with your organization account to continue.</p>
+          <div className="relative flex items-center gap-3"><div className="brand-mark"><Icon name="leaf" className="h-5 w-5" /></div><div><p className="text-lg font-bold">Verdantrix</p><p className="text-[10px] uppercase tracking-[.18em] text-emerald-300">Carbon intelligence</p></div></div>
+          <h1 className="auth-title">Turn operational data into audit-ready climate intelligence.</h1>
+          <p className="auth-copy">A single workspace to ingest, validate, review, and trace every emissions record with confidence.</p>
+          <div className="auth-proof">
+            <div><Icon name="database" className="h-5 w-5 text-emerald-300"/><strong className="mt-3 block text-lg">3</strong><span className="text-[10px] text-slate-400">Data sources</span></div>
+            <div><Icon name="shield" className="h-5 w-5 text-emerald-300"/><strong className="mt-3 block text-lg">100%</strong><span className="text-[10px] text-slate-400">Traceable</span></div>
+            <div><Icon name="trend" className="h-5 w-5 text-emerald-300"/><strong className="mt-3 block text-lg">Live</strong><span className="text-[10px] text-slate-400">Insights</span></div>
+          </div>
         </div>
 
         <div className="auth-content">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">Sign in</p>
-          <h2 className="mt-3 text-3xl font-semibold text-slate-900">Access Verdantrix Workspace</h2>
-          <p className="mt-3 text-sm text-slate-500">Sign in to continue to your organization workspace.</p>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-700">Welcome back</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">Sign in to your workspace</h2>
+          <p className="mt-3 text-sm text-slate-500">Continue managing your organization’s sustainability data.</p>
 
           <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
             <div>

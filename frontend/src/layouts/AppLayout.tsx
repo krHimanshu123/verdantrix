@@ -1,97 +1,94 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import Icon from "../components/Icon";
 
 const links = [
-  { label: "Dashboard", to: "/dashboard" },
-  { label: "Upload Center", to: "/uploads" },
-  { label: "Review Console", to: "/reviews" },
-  { label: "Audit Timeline", to: "/audit" }
+  { label: "Overview", to: "/dashboard", icon: "grid", hint: "Performance snapshot" },
+  { label: "Data ingestion", to: "/uploads", icon: "upload", hint: "Connect source data" },
+  { label: "Review queue", to: "/reviews", icon: "review", hint: "Resolve exceptions" },
+  { label: "Audit trail", to: "/audit", icon: "history", hint: "Track every change" }
 ];
+
+const pageNames: Record<string, string> = {
+  "/dashboard": "Executive overview",
+  "/uploads": "Data ingestion",
+  "/reviews": "Review queue",
+  "/audit": "Audit trail"
+};
 
 export default function AppLayout() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, logout } = useAuth();
   const displayName = [user?.first_name, user?.last_name].filter(Boolean).join(" ") || user?.username || "Verdantrix User";
+  const initials = displayName.split(" ").map((word) => word[0]).join("").slice(0, 2).toUpperCase();
 
   return (
-    <div className="h-screen overflow-hidden bg-app text-slate-900">
-      <div className="flex h-full">
-        <aside className="sidebar hidden h-full w-72 shrink-0 overflow-hidden px-6 py-8 text-white lg:flex lg:flex-col">
+    <div className="app-frame">
+      <aside className="sidebar">
+        <div className="brand">
+          <div className="brand-mark"><Icon name="leaf" className="h-5 w-5" /></div>
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Verdantrix</p>
-            <h1 className="mt-3 text-2xl font-semibold">Operations Workspace</h1>
-            <p className="mt-3 text-sm leading-6 text-slate-400">Analyst console for ingestion intake, record review, and audit traceability.</p>
+            <div className="brand-name">Verdantrix</div>
+            <div className="brand-subtitle">Carbon intelligence</div>
           </div>
+        </div>
 
-          <nav className="mt-10 space-y-2">
-            {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) =>
-                  `block rounded-xl px-4 py-3 text-sm font-medium transition ${
-                    isActive ? "bg-white text-slate-900 shadow-sm" : "text-slate-300 hover:bg-slate-800 hover:text-white"
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          <div className="mt-auto rounded-2xl border border-slate-700 bg-slate-800/80 p-4 shadow-lg">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Signed in</p>
-            <p className="mt-2 text-sm font-semibold">{displayName}</p>
-            <p className="mt-1 text-xs text-slate-400">{user?.role || "analyst"}{user?.organization_name ? ` • ${user.organization_name}` : ""}</p>
-            <button
-              type="button"
-              className="mt-4 button-secondary w-full border-slate-600 bg-transparent text-white hover:border-slate-500"
-              onClick={() => {
-                logout();
-                navigate("/login");
-              }}
-            >
-              Sign out
-            </button>
+        <div className="workspace-switcher">
+          <div className="workspace-logo">{(user?.organization_name || "V")[0]}</div>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-semibold text-white">{user?.organization_name || "Operations workspace"}</p>
+            <p className="mt-0.5 text-xs text-slate-400">Enterprise workspace</p>
           </div>
-        </aside>
+          <Icon name="chevron" className="h-4 w-4 rotate-90 text-slate-500" />
+        </div>
 
-        <main className="h-full flex-1 overflow-y-auto px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-6 rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm lg:hidden">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h2 className="text-lg font-semibold">Verdantrix</h2>
-                  <p className="mt-1 text-sm text-slate-500">{user?.organization_name || "Operations workspace"}</p>
-                  <p className="mt-1 text-xs text-slate-500">Signed in as {displayName}</p>
-                </div>
-                <button
-                  type="button"
-                  className="button-secondary shrink-0"
-                  onClick={() => {
-                    logout();
-                    navigate("/login");
-                  }}
-                >
-                  Sign out
-                </button>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {links.map((link) => (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    className={({ isActive }) =>
-                      `rounded-xl px-4 py-2 text-sm ${isActive ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700"}`
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-            <Outlet />
+        <p className="nav-label">Workspace</p>
+        <nav className="space-y-1.5">
+          {links.map((link) => (
+            <NavLink key={link.to} to={link.to} className={({ isActive }) => `nav-item ${isActive ? "nav-item-active" : ""}`}>
+              <Icon name={link.icon} className="h-[19px] w-[19px]" />
+              <span className="flex-1">{link.label}</span>
+              <Icon name="chevron" className="h-3.5 w-3.5 opacity-50" />
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="sidebar-insight">
+          <div className="flex items-center gap-2 text-emerald-300">
+            <Icon name="shield" className="h-4 w-4" />
+            <span className="text-xs font-semibold uppercase tracking-wider">Audit ready</span>
           </div>
+          <p className="mt-3 text-sm font-medium text-white">Your workspace is protected</p>
+          <p className="mt-1.5 text-xs leading-5 text-slate-400">Source lineage and analyst actions are continuously preserved.</p>
+        </div>
+
+        <button className="user-card" onClick={() => { logout(); navigate("/login"); }}>
+          <span className="avatar">{initials}</span>
+          <span className="min-w-0 flex-1 text-left">
+            <span className="block truncate text-sm font-semibold text-white">{displayName}</span>
+            <span className="block truncate text-xs capitalize text-slate-400">{user?.role || "analyst"} · Sign out</span>
+          </span>
+          <Icon name="chevron" className="h-4 w-4 text-slate-500" />
+        </button>
+      </aside>
+
+      <div className="app-content">
+        <header className="topbar">
+          <div>
+            <p className="text-xs font-medium text-slate-400">Verdantrix / Workspace</p>
+            <p className="mt-0.5 text-sm font-semibold text-slate-800">{pageNames[location.pathname] || "Workspace"}</p>
+          </div>
+          <div className="topbar-actions">
+            <div className="system-status"><span className="status-dot" />All systems operational</div>
+            <button className="icon-button" aria-label="Search"><Icon name="search" className="h-[18px] w-[18px]" /></button>
+            <button className="icon-button relative" aria-label="Notifications"><Icon name="bell" className="h-[18px] w-[18px]" /><span className="notification-dot" /></button>
+            <div className="topbar-avatar">{initials}</div>
+          </div>
+        </header>
+
+        <main className="page-scroll">
+          <div className="page-container"><Outlet /></div>
         </main>
       </div>
     </div>

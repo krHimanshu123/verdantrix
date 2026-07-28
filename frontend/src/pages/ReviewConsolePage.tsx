@@ -6,6 +6,7 @@ import StatusPill from "../components/StatusPill";
 import { useAsyncData } from "../hooks/useAsyncData";
 import { fetchEmissionRecords, reviewRecord, updateRecord } from "../services/api";
 import { EmissionRecord } from "../types";
+import Icon from "../components/Icon";
 
 export default function ReviewConsolePage() {
   useEffect(() => {
@@ -69,8 +70,8 @@ export default function ReviewConsolePage() {
     <div className="space-y-6">
       <div className="workspace-header">
         <div>
-          <p className="eyebrow">Workflow</p>
-          <h1 className="workspace-title">Review Console</h1>
+          <p className="eyebrow">Analyst workflow</p>
+          <h1 className="workspace-title">Review queue</h1>
           <p className="workspace-copy">Review normalized records, document analyst decisions, and lock final rows once they are ready for audit.</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[540px]">
@@ -156,10 +157,11 @@ export default function ReviewConsolePage() {
 
 function SummaryCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="panel">
-      <div className="panel-body">
-        <p className="text-sm text-slate-500">{label}</p>
-        <p className="mt-2 text-2xl font-semibold">{value}</p>
+    <div className="metric-card">
+      <div className="flex items-center gap-4">
+        <div className="metric-icon"><Icon name={label.includes("High") ? "alert" : label.includes("Pending") ? "history" : "review"} className="h-5 w-5" /></div>
+        <div><p className="text-xs font-semibold uppercase tracking-wider text-slate-400">{label}</p>
+        <p className="mt-1 text-2xl font-extrabold tracking-tight">{value}</p></div>
       </div>
     </div>
   );

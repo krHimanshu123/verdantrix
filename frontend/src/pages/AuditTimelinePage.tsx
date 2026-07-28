@@ -3,6 +3,7 @@ import EmptyState from "../components/EmptyState";
 import { useAsyncData } from "../hooks/useAsyncData";
 import { fetchAuditLogs } from "../services/api";
 import { AuditLogEntry } from "../types";
+import Icon from "../components/Icon";
 
 export default function AuditTimelinePage() {
   useEffect(() => {
@@ -15,8 +16,8 @@ export default function AuditTimelinePage() {
     <div className="space-y-6">
       <div className="workspace-header">
         <div>
-          <p className="eyebrow">Traceability</p>
-          <h1 className="workspace-title">Audit Timeline</h1>
+          <p className="eyebrow">Immutable traceability</p>
+          <h1 className="workspace-title">Audit trail</h1>
           <p className="workspace-copy">Focused change log across ingestion, note edits, analyst decisions, and final audit locks.</p>
         </div>
       </div>
@@ -29,10 +30,12 @@ export default function AuditTimelinePage() {
       ) : null}
 
       {auditState.data?.length ? (
-        <div className="space-y-4">
+        <div className="relative space-y-4 before:absolute before:bottom-8 before:left-[26px] before:top-8 before:w-px before:bg-emerald-200">
           {auditState.data.map((entry: AuditLogEntry) => (
-            <div key={entry.id} className="panel">
-              <div className="panel-body grid gap-4 lg:grid-cols-[240px_1fr]">
+            <div key={entry.id} className="relative pl-14">
+              <div className="absolute left-[14px] top-7 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 ring-4 ring-[#f4f7f5]"><Icon name={entry.action_type === "ingested" ? "upload" : entry.action_type.includes("lock") ? "lock" : "history"} className="h-3.5 w-3.5" /></div>
+            <div className="panel">
+              <div className="panel-body grid gap-5 lg:grid-cols-[220px_1fr]">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-slate-500">{formatAction(entry.action_type)}</p>
                   <p className="mt-2 text-sm font-semibold text-slate-900">{entry.emission_record_reference}</p>
@@ -49,6 +52,7 @@ export default function AuditTimelinePage() {
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           ))}
         </div>

@@ -1,219 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  color: #162033;
-  background: #f3f5f8;
-  --bg-app: #f3f5f8;
-  --bg-panel: #ffffff;
-  --bg-panel-soft: #f8fafc;
-  --bg-sidebar: #111827;
-  --bg-sidebar-muted: #1f2937;
-  --text-main: #162033;
-  --text-muted: #667085;
-  --border-soft: #dbe3ed;
-  --border-strong: #c8d3df;
-  --shadow-panel: 0 10px 22px rgba(15, 23, 42, 0.06);
-  --shadow-soft: 0 6px 16px rgba(15, 23, 42, 0.05);
-
-  --chart-1: var(--text-main);
-  --chart-2: var(--text-muted);
-  --chart-3: var(--border-strong);
+  color: #17251f;
+  background: #f4f7f5;
+  --ink: #17251f;
+  --muted: #66756e;
+  --line: #e2e9e5;
+  --emerald: #087f5b;
+  --emerald-bright: #15b77e;
+  --emerald-soft: #e9f7f1;
+  --sidebar: #10251e;
+  --chart-1: #0b8f67;
+  --chart-2: #62c99f;
+  --chart-3: #d6ede3;
+  --border-soft: #e2e9e5;
 }
 
-html,
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
 body {
-  height: 100%;
-  margin: 0;
-  font-family: "IBM Plex Sans", ui-sans-serif, system-ui;
-  color: var(--text-main);
-  background: var(--bg-app);
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  color: var(--ink);
+  background: #f4f7f5;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(21, 183, 126, .22);
+  outline-offset: 2px;
 }
 
-#root {
-  height: 100%;
-}
-
-.bg-app {
-  background: var(--bg-app);
-}
-
-.panel {
-  @apply rounded-2xl border bg-white;
-  border-color: var(--border-soft);
-  box-shadow: var(--shadow-panel);
-}
-
-.panel-header {
-  @apply flex items-center justify-between gap-4 border-b px-5 py-4;
-  border-color: var(--border-soft);
-}
-
-.panel-body {
-  @apply p-5;
-}
-
-.input {
-  @apply w-full rounded-xl border bg-white px-4 py-3 text-sm outline-none transition;
-  border-color: var(--border-strong);
-  color: var(--text-main);
-}
-
-.input:focus {
-  border-color: #475467;
-  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.18);
-}
-
-.select {
-  @apply input appearance-none;
-}
-
-.button-primary {
-  @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:bg-slate-400;
-  background: var(--bg-sidebar-muted);
-}
-
-.button-primary:hover {
-  background: var(--bg-sidebar);
-}
-
-.button-secondary {
-  @apply inline-flex items-center justify-center rounded-xl border bg-white px-4 py-2.5 text-sm font-semibold transition;
-  border-color: var(--border-strong);
-  color: #344054;
-}
-
-.button-secondary:hover {
-  border-color: #98a2b3;
-  background: #f8fafc;
-}
-
-.status-pill {
-  @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold capitalize;
-}
-
-.workspace-header {
-  @apply mb-6 flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between;
-}
-
-.workspace-title {
-  @apply mt-2 text-3xl font-semibold tracking-tight text-slate-900;
-}
-
-.workspace-copy {
-  @apply mt-2 max-w-3xl text-sm leading-6 text-slate-500;
-}
-
-.eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.28em] text-slate-500;
-}
-
-.alert-banner {
-  @apply rounded-xl border px-4 py-3 text-sm;
-}
-
-.alert-error {
-  @apply border-rose-200 bg-rose-50 text-rose-700;
-}
-
-.alert-info {
-  @apply border-slate-200 bg-slate-50 text-slate-700;
-}
-
-.table-shell {
-  @apply overflow-hidden rounded-2xl border bg-white;
-  border-color: var(--border-soft);
-  box-shadow: var(--shadow-panel);
-}
-
-.table-compact {
-  @apply min-w-full text-left text-sm;
-}
-
-.table-compact thead {
-  @apply bg-slate-50 text-slate-500;
-}
-
-.table-compact th {
-  @apply px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em];
-}
-
-.table-compact td {
-  @apply px-4 py-4 align-top;
-}
-
-.table-compact tbody tr:hover {
-  background: var(--bg-panel-soft);
-}
-
-.table-compact tbody tr {
-  border-color: var(--border-soft);
-}
-
-.dropzone {
-  @apply rounded-2xl border border-dashed bg-slate-50 p-5 transition;
-  border-color: var(--border-strong);
-}
-
-.dropzone-active {
-  border-color: #344054;
-  background: #eef2f6;
-}
-
-.auth-shell {
-  @apply flex min-h-screen items-center justify-center px-4;
-  background: var(--bg-app);
-}
-
-.auth-panel {
-  @apply grid w-full max-w-6xl overflow-hidden rounded-[28px] border bg-white/95 shadow-2xl lg:grid-cols-[1fr_0.95fr];
-  border-color: #dbe3ed;
-}
-
-.auth-aside {
-  @apply hidden p-10 text-white lg:block;
-  background: linear-gradient(180deg, #111827 0%, #182230 100%);
-}
-
-.auth-eyebrow {
-  @apply text-xs uppercase tracking-[0.35em] text-slate-400;
-}
-
-.auth-title {
-  @apply mt-6 text-4xl font-semibold leading-tight;
-}
-
-.auth-copy {
-  @apply mt-6 max-w-md text-sm leading-7 text-slate-300;
-}
-
-.auth-content {
-  @apply p-8 sm:p-10;
-}
-
-.metric-grid {
-  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-4;
-}
-
-.kpi-meta {
-  @apply mt-2 text-xs uppercase tracking-[0.18em] text-slate-500;
-}
-
-.modal-backdrop {
-  @apply fixed inset-0 z-40 flex items-center justify-center bg-slate-950/40 p-4;
-}
-
-.modal-card {
-  @apply w-full max-w-md rounded-2xl border bg-white p-6 shadow-2xl;
-  border-color: var(--border-soft);
-}
-
-.sticky-head thead th {
-  @apply sticky top-0 z-10 bg-slate-50;
-  box-shadow: 0 1px 0 0 rgba(203, 213, 225, 0.9);
-}
-
+.app-frame { @apply flex h-screen overflow-hidden; background: #f4f7f5; }
 .sidebar {
-  background: linear-gradient(180deg, var(--bg-sidebar) 0%, var(--bg-sidebar-muted) 100%);
+  @apply hidden h-full w-[270px] shrink-0 flex-col px-4 py-5 text-white lg:flex;
+  background: linear-gradient(165deg, #10271f 0%, #0b1d17 100%);
+  box-shadow: 12px 0 40px rgba(16, 37, 30, .08);
+}
+.brand { @apply flex items-center gap-3 px-2; }
+.brand-mark { @apply flex h-10 w-10 items-center justify-center rounded-xl text-white; background: linear-gradient(135deg, #19b982, #087f5b); box-shadow: 0 8px 20px rgba(21,183,126,.25); }
+.brand-name { font-family: "Manrope"; @apply text-[17px] font-extrabold tracking-tight text-white; }
+.brand-subtitle { @apply mt-0.5 text-[10px] font-semibold uppercase tracking-[.16em] text-emerald-300/70; }
+.workspace-switcher { @apply mt-7 flex items-center gap-3 rounded-xl border border-white/10 bg-white/[.05] p-3; }
+.workspace-logo { @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-400/15 text-sm font-bold text-emerald-300; }
+.nav-label { @apply mb-2 mt-7 px-3 text-[10px] font-bold uppercase tracking-[.18em] text-slate-500; }
+.nav-item { @apply flex items-center gap-3 rounded-xl px-3 py-3 text-[13px] font-medium text-slate-400 transition-all duration-200; }
+.nav-item:hover { @apply bg-white/[.05] text-white; transform: translateX(2px); }
+.nav-item-active { @apply bg-emerald-400/[.12] text-emerald-300; box-shadow: inset 3px 0 0 #34d399; }
+.sidebar-insight { @apply mt-auto rounded-2xl border border-white/[.08] bg-white/[.04] p-4; }
+.user-card { @apply mt-3 flex w-full items-center gap-3 rounded-xl p-2.5 transition hover:bg-white/[.06]; }
+.avatar, .topbar-avatar { @apply flex shrink-0 items-center justify-center rounded-full font-bold; background: #d9f5e9; color: #087f5b; }
+.avatar { @apply h-9 w-9 text-xs; }
+.topbar-avatar { @apply h-8 w-8 text-[11px]; }
+.app-content { @apply flex min-w-0 flex-1 flex-col; }
+.topbar { @apply flex h-[70px] shrink-0 items-center justify-between border-b bg-white px-5 sm:px-8; border-color: var(--line); }
+.topbar-actions { @apply flex items-center gap-2; }
+.system-status { @apply mr-2 hidden items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-[11px] font-semibold text-emerald-700 md:flex; }
+.status-dot { @apply h-1.5 w-1.5 rounded-full bg-emerald-500; box-shadow: 0 0 0 4px rgba(16,185,129,.12); }
+.icon-button { @apply flex h-9 w-9 items-center justify-center rounded-xl border text-slate-500 transition hover:bg-slate-50 hover:text-slate-900; border-color: var(--line); }
+.notification-dot { @apply absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-rose-500 ring-2 ring-white; }
+.page-scroll { @apply flex-1 overflow-y-auto; background: radial-gradient(circle at 95% 0%, rgba(220,247,235,.65), transparent 28%), #f4f7f5; }
+.page-container { @apply mx-auto max-w-[1480px] px-4 py-7 sm:px-7 lg:px-9 lg:py-9; }
+
+.workspace-header { @apply mb-7 flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between; }
+.workspace-title { font-family: "Manrope"; @apply mt-2 text-[30px] font-extrabold tracking-[-.035em] text-[#14251e] sm:text-[34px]; }
+.workspace-copy { @apply mt-2 max-w-2xl text-[14px] leading-6 text-slate-500; }
+.eyebrow { @apply flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.18em] text-emerald-700; }
+.eyebrow::before { content: ""; @apply block h-1.5 w-1.5 rounded-full bg-emerald-500; }
+
+.panel, .table-shell { @apply overflow-hidden rounded-2xl border bg-white; border-color: var(--line); box-shadow: 0 2px 3px rgba(16,37,30,.02), 0 12px 34px rgba(16,37,30,.045); }
+.panel-header { @apply flex items-center justify-between gap-4 border-b px-5 py-[18px] sm:px-6; border-color: var(--line); }
+.panel-body { @apply p-5 sm:p-6; }
+.section-title { font-family: "Manrope"; @apply text-[16px] font-bold tracking-tight text-slate-900; }
+.metric-grid { @apply grid gap-4 md:grid-cols-2 xl:grid-cols-4; }
+.metric-card { @apply relative overflow-hidden rounded-2xl border bg-white p-5; border-color: var(--line); box-shadow: 0 8px 26px rgba(16,37,30,.04); }
+.metric-card::after { content: ""; @apply absolute -right-8 -top-8 h-24 w-24 rounded-full; background: rgba(21,183,126,.055); }
+.metric-icon { @apply flex h-10 w-10 items-center justify-center rounded-xl; background: var(--emerald-soft); color: var(--emerald); }
+.metric-value { font-family: "Manrope"; @apply mt-5 text-[30px] font-extrabold tracking-[-.04em] text-slate-900; }
+.metric-change { @apply inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-1 text-[11px] font-bold text-emerald-700; }
+.kpi-meta { @apply mt-2 text-xs text-slate-400; }
+
+.input, .select { @apply w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-800 outline-none transition; border-color: #dbe4df; }
+.input:hover, .select:hover { border-color: #bdccc4; }
+.input:focus, .select:focus { border-color: #1aaa79; box-shadow: 0 0 0 4px rgba(21,183,126,.10); }
+.select { @apply appearance-none; background-image: linear-gradient(45deg,transparent 50%,#718078 50%),linear-gradient(135deg,#718078 50%,transparent 50%); background-position: calc(100% - 18px) 52%,calc(100% - 13px) 52%; background-size:5px 5px; background-repeat:no-repeat; }
+.button-primary { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-50; background: linear-gradient(135deg, #10976c, #087f5b); box-shadow: 0 7px 18px rgba(8,127,91,.16); }
+.button-primary:hover { filter: brightness(.95); transform: translateY(-1px); box-shadow: 0 10px 22px rgba(8,127,91,.22); }
+.button-secondary { @apply inline-flex items-center justify-center gap-2 rounded-xl border bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition disabled:opacity-50; border-color: #dbe4df; }
+.button-secondary:hover { @apply bg-slate-50 text-slate-900; border-color: #bdccc4; }
+.status-pill { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold capitalize; }
+.status-pill::before { content:""; @apply h-1.5 w-1.5 rounded-full bg-current opacity-70; }
+.alert-banner { @apply rounded-xl border px-4 py-3 text-sm; }
+.alert-error { @apply border-rose-200 bg-rose-50 text-rose-700; }
+.alert-info { @apply border-emerald-200 bg-emerald-50 text-emerald-800; }
+
+.table-compact { @apply min-w-full text-left text-sm; }
+.table-compact thead { background: #f8faf9; color: #718078; }
+.table-compact th { @apply px-5 py-3.5 text-[10px] font-bold uppercase tracking-[.13em]; }
+.table-compact td { @apply px-5 py-4 align-middle; }
+.table-compact tbody tr { @apply border-t transition; border-color: #edf1ef; }
+.table-compact tbody tr:hover { background: #f9fcfa; }
+.sticky-head thead th { @apply sticky top-0 z-10; background: #f8faf9; box-shadow: 0 1px 0 #e2e9e5; }
+.dropzone { @apply rounded-xl border border-dashed p-5 transition; border-color: #cbd8d1; background: #f8fbf9; }
+.dropzone:hover, .dropzone-active { border-color: #19a878; background: #effaf5; }
+
+.auth-shell { @apply flex min-h-screen items-center justify-center p-4 sm:p-8; background: radial-gradient(circle at 15% 20%, rgba(52,211,153,.18), transparent 27%), radial-gradient(circle at 90% 85%, rgba(16,185,129,.12), transparent 25%), #edf4f0; }
+.auth-panel { @apply grid w-full max-w-6xl overflow-hidden rounded-[28px] border bg-white lg:grid-cols-[1.05fr_.95fr]; border-color: rgba(255,255,255,.7); box-shadow: 0 30px 90px rgba(16,37,30,.14); }
+.auth-aside { @apply relative hidden min-h-[650px] overflow-hidden p-12 text-white lg:block; background: linear-gradient(145deg,#102b22,#0a1e18); }
+.auth-aside::before { content:""; @apply absolute -right-24 -top-20 h-80 w-80 rounded-full border border-emerald-400/20; box-shadow: 0 0 0 55px rgba(52,211,153,.04),0 0 0 110px rgba(52,211,153,.025); }
+.auth-eyebrow { @apply relative text-xs font-bold uppercase tracking-[.26em] text-emerald-300; }
+.auth-title { font-family:"Manrope"; @apply relative mt-24 max-w-lg text-[42px] font-extrabold leading-[1.12] tracking-[-.04em]; }
+.auth-copy { @apply relative mt-6 max-w-md text-sm leading-7 text-slate-300; }
+.auth-content { @apply flex flex-col justify-center p-8 sm:p-12; }
+.auth-proof { @apply relative mt-12 grid grid-cols-3 gap-3; }
+.auth-proof > div { @apply rounded-xl border border-white/10 bg-white/[.05] p-3; }
+.modal-backdrop { @apply fixed inset-0 z-40 flex items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm; }
+.modal-card { @apply w-full max-w-md rounded-2xl border bg-white p-6 shadow-2xl; border-color: var(--line); }
+
+@media (max-width: 1023px) {
+  .app-frame { @apply block h-auto min-h-screen; }
+  .app-content { @apply min-h-screen; }
+  .topbar { @apply sticky top-0 z-30; }
 }
