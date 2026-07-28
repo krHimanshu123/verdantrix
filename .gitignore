@@ -10,3 +10,4 @@ backend/.env
 *.log
 *.sqlite3
 *.tsbuildinfo
+backend/staticfiles/

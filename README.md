@@ -90,6 +90,33 @@ This repository is set up for local runs. If you deploy it, treat it like a norm
 - Serve the frontend build artifacts from a static host (or behind a reverse proxy) and configure CORS accordingly.
 - Consider proper file storage for uploads (the prototype focuses on row-level lineage rather than durable blob storage).
 
+### Render backend deployment
+
+The repository includes a root-level `render.yaml` Blueprint that creates:
+
+- a Django web service rooted at `backend/`
+- a managed PostgreSQL database
+- automatic dependency installation, static collection, and migrations
+- a `/health/` deployment health check
+
+In Render, create a **New Blueprint Instance** from this repository. During setup,
+provide the production Vercel origin (with no trailing slash) for both
+`CORS_ALLOWED_ORIGINS` and `CSRF_TRUSTED_ORIGINS`, for example:
+
+```text
+https://verdantrix.vercel.app
+```
+
+After Render reports the service as live, set this variable in the Vercel project
+for Production, Preview, and Development:
+
+```text
+VITE_API_BASE_URL=https://verdantrix-api.onrender.com/api
+```
+
+Replace the hostname with the actual Render service URL, then redeploy the Vercel
+frontend. Verify the backend first at `https://<service>.onrender.com/health/`.
+
 ## API overview
 
 Authentication:

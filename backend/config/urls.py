@@ -9,6 +9,7 @@ from apps.ingestion.views import DataSourceViewSet, SAPUploadView, TravelSyncVie
 from apps.normalization.views import NormalizedEmissionRecordViewSet
 from apps.organizations.views import OrganizationViewSet
 from apps.reviews.views import AuthLoginView, auth_me_view, register_view, review_action_view
+from common.views import health_view
 
 router = DefaultRouter()
 router.register(r"organizations", OrganizationViewSet, basename="organization")
@@ -17,6 +18,7 @@ router.register(r"records", NormalizedEmissionRecordViewSet, basename="record")
 router.register(r"audit-logs", AuditLogViewSet, basename="audit-log")
 
 urlpatterns = [
+    path("health/", health_view, name="health"),
     path("admin/", admin.site.urls),
     path("api/auth/register/", register_view, name="auth-register"),
     path("api/auth/login/", AuthLoginView.as_view(), name="auth-login"),
